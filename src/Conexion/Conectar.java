@@ -15,7 +15,7 @@ import java.sql.SQLException;
  */
 public class Conectar {
     public static Connection conn;
-    private static final String driver = "com.mysql.jdbc.Driver";
+    private static final String driver = "com.mysql.cj.jdbc.Driver";
     private static final String user = "root";
     private static final String password = "lordatraza";
     private static final String url ="jdbc:mysql://localhost:3306/aulavirtual?useSSL=false";
