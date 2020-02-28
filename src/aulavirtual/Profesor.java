@@ -635,6 +635,7 @@ public class Profesor extends javax.swing.JFrame {
     private void jButtonArchivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonArchivosActionPerformed
         // TODO add your handling code here:
         ProfesorArchivos pA=new ProfesorArchivos();
+        pA.setCodCurso(getCodigoCurso());
         pA.setVisible(true);
     }//GEN-LAST:event_jButtonArchivosActionPerformed
 

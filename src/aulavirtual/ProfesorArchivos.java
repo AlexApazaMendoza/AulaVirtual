@@ -46,6 +46,10 @@ public class ProfesorArchivos extends javax.swing.JFrame {
     private String codCursoEstudianteSemestre ="MATRI0001";
     private String codAsistencia;
     
+    //AGREGO VARIABLE PARA ALMACENAR EL CODIGO DEL CURSO Y OBTENERLO DEL FORM PROFESOR
+    private String codCurso;
+    //
+    
     //variables cuando selecciono algo de la tabla
     private String nombreSeleccionado;
     private String descripcionSeleccionado;
@@ -81,10 +85,17 @@ public class ProfesorArchivos extends javax.swing.JFrame {
     public void setDescripcionSeleccionado(String descripcionSeleccionado) {
         this.descripcionSeleccionado = descripcionSeleccionado;
     }
-    
-    
+
+    public String getCodCurso() {
+        return codCurso;
+    }
+
+    public void setCodCurso(String codCurso) {
+        this.codCurso = codCurso;
+    }
     
     //metodos
+    //public void obtener
     public void obtenerCodigoAsistencia(String codigoSemana){
         try{
             Conectar cnx = new Conectar();
@@ -413,7 +424,7 @@ public class ProfesorArchivos extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButtonEliminarArchivo)
                     .addComponent(jButtonDescarga))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
