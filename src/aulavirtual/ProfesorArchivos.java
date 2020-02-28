@@ -43,7 +43,7 @@ public class ProfesorArchivos extends javax.swing.JFrame {
     
     
     /*INICIA MI CODIGO*/
-    private String codCursoEstudianteSemestre ="MATRI0001";
+    private String[] codCursoEstudianteSemestre;
     private String codAsistencia;
     
     //AGREGO VARIABLE PARA ALMACENAR EL CODIGO DEL CURSO Y OBTENERLO DEL FORM PROFESOR
@@ -53,14 +53,14 @@ public class ProfesorArchivos extends javax.swing.JFrame {
     //variables cuando selecciono algo de la tabla
     private String nombreSeleccionado;
     private String descripcionSeleccionado;
-
+/*
     public String getCodCursoEstudianteSemestre() {
         return codCursoEstudianteSemestre;
     }
 
     public void setCodCursoEstudianteSemestre(String codCursoEstudianteSemestre) {
         this.codCursoEstudianteSemestre = codCursoEstudianteSemestre;
-    }
+    }*/
 
     public String getCodAsistencia() {
         return codAsistencia;
@@ -95,7 +95,30 @@ public class ProfesorArchivos extends javax.swing.JFrame {
     }
     
     //metodos
-    //public void obtener
+    public void obtenercodCursoEstudianteSemestre(){
+        int numrow=0;
+        try{
+            Conectar cnx = new Conectar();
+            Connection registro = cnx.getConnection();
+            String sql="select codCursoEstudianteSemestre from curso_estudiantesemestre "
+                    + "where codCurso=\""+getCodCurso()+"\" AND codSemestre=\"2019A\"; ";
+            PreparedStatement st = registro.prepareStatement(sql);
+            ResultSet rs= st.executeQuery();
+            ResultSet rsCopy=rs;
+            while(rsCopy.next()){
+                numrow++;
+            }
+            codCursoEstudianteSemestre=new String[numrow];
+            while(rs.next()){
+                int i=0;
+                codCursoEstudianteSemestre[i]=rs.getString(1);
+                i++;
+            }
+                    
+        }catch(SQLException e){
+            System.out.println("Error"+e.getMessage());
+        }
+    }
     public void obtenerCodigoAsistencia(String codigoSemana){
         try{
             Conectar cnx = new Conectar();
