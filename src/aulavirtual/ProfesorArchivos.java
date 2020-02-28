@@ -44,7 +44,7 @@ public class ProfesorArchivos extends javax.swing.JFrame {
     
     /*INICIA MI CODIGO*/
     private String[] codCursoEstudianteSemestre;
-    private String codAsistencia;
+    private String[] codAsistencia;
     
     //AGREGO VARIABLE PARA ALMACENAR EL CODIGO DEL CURSO Y OBTENERLO DEL FORM PROFESOR
     private String codCurso;
@@ -53,22 +53,6 @@ public class ProfesorArchivos extends javax.swing.JFrame {
     //variables cuando selecciono algo de la tabla
     private String nombreSeleccionado;
     private String descripcionSeleccionado;
-/*
-    public String getCodCursoEstudianteSemestre() {
-        return codCursoEstudianteSemestre;
-    }
-
-    public void setCodCursoEstudianteSemestre(String codCursoEstudianteSemestre) {
-        this.codCursoEstudianteSemestre = codCursoEstudianteSemestre;
-    }*/
-
-    public String getCodAsistencia() {
-        return codAsistencia;
-    }
-
-    public void setCodAsistencia(String codAsistencia) {
-        this.codAsistencia = codAsistencia;
-    }
 
     public String getNombreSeleccionado() {
         return nombreSeleccionado;
@@ -108,10 +92,10 @@ public class ProfesorArchivos extends javax.swing.JFrame {
             while(rsCopy.next()){
                 numrow++;
             }
-            codCursoEstudianteSemestre=new String[numrow];
+            codCursoEstudianteSemestre = new String[numrow];
             while(rs.next()){
                 int i=0;
-                codCursoEstudianteSemestre[i]=rs.getString(1);
+                codCursoEstudianteSemestre[i]=rs.getString(1);//Aqui me quedo
                 i++;
             }
         }catch(SQLException e){
@@ -122,16 +106,18 @@ public class ProfesorArchivos extends javax.swing.JFrame {
         try{
             Conectar cnx = new Conectar();
             Connection registro = cnx.getConnection();
-            String sql="select *from Asistencia\n" +
-            "where codCursoEstudianteSemestre=\""+getCodCursoEstudianteSemestre()+"\" and codSemana=\""+codigoSemana+"\"; ";
-            PreparedStatement st = registro.prepareStatement(sql);
-            ResultSet rs= st.executeQuery();
-            if(rs.next()){
-                setCodAsistencia(rs.getString(1));
-            }else{
-                JOptionPane.showInputDialog("No se encontro la asistencia");
-            }
-                    
+            codAsistencia = new String[codCursoEstudianteSemestre.length];
+            for (int i=0;i<=codCursoEstudianteSemestre.length;i++){
+                String sql="select *from Asistencia\n" +
+                    "where codCursoEstudianteSemestre=\""+codCursoEstudianteSemestre[i]+"\" and codSemana=\""+codigoSemana+"\"; ";
+                PreparedStatement st = registro.prepareStatement(sql);
+                ResultSet rs= st.executeQuery();
+                if(rs.next()){
+                    codAsistencia[i]=rs.getString(1);
+                }else{
+                    JOptionPane.showMessageDialog(null,"No se encontro la asistencia");
+                }
+            }     
         }catch(SQLException e){
             System.out.println("Error"+e.getMessage());
         }
@@ -197,7 +183,7 @@ public class ProfesorArchivos extends javax.swing.JFrame {
             Conectar cnx = new Conectar();
             Connection registros = cnx.getConnection();
             String sql="select Archivo.nombreArchivo, Archivo.descripcion from Archivo\n" +
-            "where Archivo.codAsistencia='"+getCodAsistencia()+"'";
+            "where Archivo.codAsistencia='"+codAsistencia[0]+"'";
             PreparedStatement st = registros.prepareStatement(sql);
             ResultSet rs= st.executeQuery();
             while(rs.next()){
@@ -210,7 +196,6 @@ public class ProfesorArchivos extends javax.swing.JFrame {
         }catch(SQLException e){
             System.out.println("Error"+e.getMessage());
         }
-        
     }
     
     public void eliminarArchivo(){
@@ -256,13 +241,15 @@ public class ProfesorArchivos extends javax.swing.JFrame {
         try{
             Conectar cnx = new Conectar();
             Connection archivosql = cnx.getConnection();
-            String sqlarchivo="insert into Archivo(codAsistencia,nombreArchivo,descripcion,archivo) values(?,?,?,?);";
-            PreparedStatement starchivo = archivosql.prepareStatement(sqlarchivo);
-            starchivo.setString(1,getCodAsistencia());
-            starchivo.setString(2,jTextFieldNombreArchivo.getText());
-            starchivo.setString(3,jTextArea1.getText());
-            starchivo.setBlob(4, fis, bytes);
-            starchivo.executeUpdate();
+            for(int i=0; i<=codAsistencia.length;i++){
+                String sqlarchivo="insert into Archivo(codAsistencia,nombreArchivo,descripcion,archivo) values(?,?,?,?);";
+                PreparedStatement starchivo = archivosql.prepareStatement(sqlarchivo);
+                starchivo.setString(1,codAsistencia[i]);
+                starchivo.setString(2,jTextFieldNombreArchivo.getText());
+                starchivo.setString(3,jTextArea1.getText());
+                starchivo.setBlob(4, fis, bytes);
+                starchivo.executeUpdate();
+            }
         }catch(SQLException e){
             System.out.println("Error: "+e.getMessage());
         }
@@ -339,6 +326,7 @@ public class ProfesorArchivos extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButtonEliminarArchivo = new javax.swing.JButton();
         jButtonDescarga = new javax.swing.JButton();
+        prueba = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
@@ -348,6 +336,11 @@ public class ProfesorArchivos extends javax.swing.JFrame {
         jTextFieldNombreArchivo = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanelCabecera.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -417,6 +410,13 @@ public class ProfesorArchivos extends javax.swing.JFrame {
             }
         });
 
+        prueba.setText("jButton3");
+        prueba.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pruebaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -429,7 +429,9 @@ public class ProfesorArchivos extends javax.swing.JFrame {
                         .addComponent(jComboBoxSemana, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(54, 54, 54)
                         .addComponent(jButton1)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(prueba)
+                        .addGap(36, 36, 36))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jButtonDescarga)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -442,7 +444,9 @@ public class ProfesorArchivos extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jComboBoxSemana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton1)
+                        .addComponent(prueba)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -614,6 +618,19 @@ public class ProfesorArchivos extends javax.swing.JFrame {
         descargarArchivo();
     }//GEN-LAST:event_jButtonDescargaActionPerformed
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        obtenercodCursoEstudianteSemestre();
+    }//GEN-LAST:event_formWindowOpened
+
+    private void pruebaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pruebaActionPerformed
+        // TODO add your handling code here:
+        for(int i=0;i<=codCursoEstudianteSemestre.length;i++){
+            JOptionPane.showMessageDialog(null,codCursoEstudianteSemestre[i]);
+        }
+        
+    }//GEN-LAST:event_pruebaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -666,5 +683,6 @@ public class ProfesorArchivos extends javax.swing.JFrame {
     private javax.swing.JTable jTableArchivos;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextFieldNombreArchivo;
+    private javax.swing.JButton prueba;
     // End of variables declaration//GEN-END:variables
 }
