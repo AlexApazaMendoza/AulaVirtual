@@ -114,7 +114,6 @@ public class ProfesorArchivos extends javax.swing.JFrame {
                 codCursoEstudianteSemestre[i]=rs.getString(1);
                 i++;
             }
-                    
         }catch(SQLException e){
             System.out.println("Error"+e.getMessage());
         }
