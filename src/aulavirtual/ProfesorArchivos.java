@@ -79,7 +79,7 @@ public class ProfesorArchivos extends javax.swing.JFrame {
     }
     
     //metodos
-    public void obtenercodCursoEstudianteSemestre(){
+    public void obtenercodCursoEstudianteSemestre(){//Listo, revisado
         int numrow=0;
         try{
             Conectar cnx = new Conectar();
@@ -88,36 +88,52 @@ public class ProfesorArchivos extends javax.swing.JFrame {
                     + "where codCurso=\""+getCodCurso()+"\" AND codSemestre=\"2019A\"; ";
             PreparedStatement st = registro.prepareStatement(sql);
             ResultSet rs= st.executeQuery();
-            ResultSet rsCopy=rs;
-            while(rsCopy.next()){
+            while(rs.next()){
                 numrow++;
             }
             codCursoEstudianteSemestre = new String[numrow];
+            int i=0;
+            rs.beforeFirst();
             while(rs.next()){
-                int i=0;
-                codCursoEstudianteSemestre[i]=rs.getString(1);//Aqui me quedo
+                codCursoEstudianteSemestre[i]=rs.getString(1);
                 i++;
             }
         }catch(SQLException e){
             System.out.println("Error"+e.getMessage());
         }
     }
-    public void obtenerCodigoAsistencia(String codigoSemana){
+    public void obtenerCodigoAsistencia(String codigoSemana){//Listo y revisado
+        String[] vector = new String[codCursoEstudianteSemestre.length];
         try{
             Conectar cnx = new Conectar();
             Connection registro = cnx.getConnection();
-            codAsistencia = new String[codCursoEstudianteSemestre.length];
-            for (int i=0;i<=codCursoEstudianteSemestre.length;i++){
-                String sql="select *from Asistencia\n" +
-                    "where codCursoEstudianteSemestre=\""+codCursoEstudianteSemestre[i]+"\" and codSemana=\""+codigoSemana+"\"; ";
+            for (int i=0;i<codCursoEstudianteSemestre.length;i++){
+                String sql="select codAsistencia from asistencia "
+                        + "where codCursoEstudianteSemestre=\""+codCursoEstudianteSemestre[i]+"\" and codSemana=\""+codigoSemana+"\"; ";
                 PreparedStatement st = registro.prepareStatement(sql);
                 ResultSet rs= st.executeQuery();
                 if(rs.next()){
-                    codAsistencia[i]=rs.getString(1);
+                    vector[i]=rs.getString(1);
                 }else{
-                    JOptionPane.showMessageDialog(null,"No se encontro la asistencia");
+                    JOptionPane.showMessageDialog(null,"No se encontro la asistencia para la matricula : "+codCursoEstudianteSemestre[i]);
+                }        
+            }
+            //quitar los null del arreglo
+            int j=0;
+            for(int i=0;i<vector.length;i++){
+                if(vector[i]!=null){
+                    j++;
                 }
-            }     
+            }
+            codAsistencia = new String[j];
+            int k=0;
+            for(int i=0;i<vector.length;i++){
+                if(vector[i]!=null){
+                    codAsistencia[k]=vector[i];
+                    k++;
+                }
+            }
+            //
         }catch(SQLException e){
             System.out.println("Error"+e.getMessage());
         }
@@ -176,7 +192,6 @@ public class ProfesorArchivos extends javax.swing.JFrame {
     }
     
     public void refrescar(){
-        
         DefaultTableModel modelo=(DefaultTableModel) jTableArchivos.getModel();
         modelo.setRowCount(0);//limpiar el modelo
         try{
@@ -198,7 +213,7 @@ public class ProfesorArchivos extends javax.swing.JFrame {
         }
     }
     
-    public void eliminarArchivo(){
+    public void eliminarArchivo(){//<---revisar
         try{
             Conectar cnx = new Conectar();
             Connection registro = cnx.getConnection();
@@ -237,11 +252,13 @@ public class ProfesorArchivos extends javax.swing.JFrame {
         }
         
     }
-    public void subirArchivo(FileInputStream archivo, int bytes){
+    public void subirArchivo(FileInputStream archivo, int bytes){//Listo, revisado
         try{
             Conectar cnx = new Conectar();
             Connection archivosql = cnx.getConnection();
-            for(int i=0; i<=codAsistencia.length;i++){
+            JOptionPane.showMessageDialog(null, "Cantidad de codigo de asistencia"+codAsistencia.length);//******************
+            for(int i=0; i<codAsistencia.length;i++){
+                JOptionPane.showMessageDialog(null, "se subio el archivo numero:"+(i+1));//***********************
                 String sqlarchivo="insert into Archivo(codAsistencia,nombreArchivo,descripcion,archivo) values(?,?,?,?);";
                 PreparedStatement starchivo = archivosql.prepareStatement(sqlarchivo);
                 starchivo.setString(1,codAsistencia[i]);
@@ -257,7 +274,6 @@ public class ProfesorArchivos extends javax.swing.JFrame {
     /**/
     /*codigo para descargar archivo*/
     public void descargarArchivo(){
-        
         try{
             Conectar cnx = new Conectar();
             Connection registro = cnx.getConnection();
@@ -625,9 +641,13 @@ public class ProfesorArchivos extends javax.swing.JFrame {
 
     private void pruebaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pruebaActionPerformed
         // TODO add your handling code here:
-        for(int i=0;i<=codCursoEstudianteSemestre.length;i++){
-            JOptionPane.showMessageDialog(null,codCursoEstudianteSemestre[i]);
-        }
+        JOptionPane.showMessageDialog(null, "nuevo sin el git");
+        //
+        /*
+            for(int j=0;j<codCursoEstudianteSemestre.length;j++){
+                JOptionPane.showMessageDialog(null, "Matriculas "+j+" : "+codCursoEstudianteSemestre[j] );
+            }*/
+            //
         
     }//GEN-LAST:event_pruebaActionPerformed
 
