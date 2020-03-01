@@ -98,9 +98,15 @@ public class ProfesorArchivos extends javax.swing.JFrame {
                 codCursoEstudianteSemestre[i]=rs.getString(1);
                 i++;
             }
+            //Cerrar el resultset y statement
+            rs.close();
+            st.close();
+            //Cierro la conexion
+            cnx.desconectar();
         }catch(SQLException e){
             System.out.println("Error"+e.getMessage());
         }
+        
     }
     
     public void obtenerCodigoAsistencia(String codigoSemana){//Listo y revisado
@@ -117,7 +123,10 @@ public class ProfesorArchivos extends javax.swing.JFrame {
                     vector[i]=rs.getString(1);
                 }else{
                     JOptionPane.showMessageDialog(null,"No se encontro la asistencia para la matricula : "+codCursoEstudianteSemestre[i]);
-                }        
+                }
+                //Cerrar el resultset y statement
+                rs.close();
+                st.close();
             }
             //quitar los null del arreglo
             int j=0;
@@ -134,7 +143,8 @@ public class ProfesorArchivos extends javax.swing.JFrame {
                     k++;
                 }
             }
-            //
+            //Cierro la conexion
+            cnx.desconectar();
         }catch(SQLException e){
             System.out.println("Error"+e.getMessage());
         }
@@ -209,12 +219,17 @@ public class ProfesorArchivos extends javax.swing.JFrame {
                 modelo.addRow(v);
             }  
             jTableArchivos.setModel(modelo);
+            //Cerrar el resultset y statement
+            rs.close();
+            st.close();
+            //Cierro la conexion
+            cnx.desconectar();
         }catch(SQLException e){
             System.out.println("Error"+e.getMessage());
         }
     }
     
-    public void eliminarArchivo(){//Listo y Revisado
+    public void eliminarArchivo(){//Listo, revisado
         try{
             Conectar cnx = new Conectar();
             Connection registro = cnx.getConnection();
@@ -224,7 +239,11 @@ public class ProfesorArchivos extends javax.swing.JFrame {
                         + " and codAsistencia='"+codAsistencia[i]+"'";
                 PreparedStatement st = registro.prepareStatement(sql);
                 st.executeUpdate();
+                //Cerrar el statement
+                st.close();
             }
+            //Cierro la conexion
+            cnx.desconectar();
         }catch(SQLException e){
             System.out.println("Error"+e.getMessage());
         }
@@ -254,23 +273,25 @@ public class ProfesorArchivos extends javax.swing.JFrame {
         }
     }
     public void subirArchivo(FileInputStream archivo, int bytes){//Listo, revisado
-
-            try{
-                Conectar cnx = new Conectar();
-                Connection archivosql = cnx.getConnection();
-                for(int i=0; i<codAsistencia.length;i++){
-                    String sqlarchivo="insert into Archivo(codAsistencia,nombreArchivo,descripcion,archivo) values(?,?,?,?);";
-                    PreparedStatement starchivo = archivosql.prepareStatement(sqlarchivo);
-                    starchivo.setString(1,codAsistencia[i]);
-                    starchivo.setString(2,jTextFieldNombreArchivo.getText());
-                    starchivo.setString(3,jTextArea1.getText());
-                    starchivo.setBlob(4, fis, bytes);
-                    starchivo.executeUpdate();
-                }
-            }catch(SQLException e){
-                System.out.println("Error: "+e.getMessage());
+        try{
+            Conectar cnx = new Conectar();
+            Connection archivosql = cnx.getConnection();
+            for(int i=0; i<codAsistencia.length;i++){
+                String sqlarchivo="insert into Archivo(codAsistencia,nombreArchivo,descripcion,archivo) values(?,?,?,?);";
+                PreparedStatement starchivo = archivosql.prepareStatement(sqlarchivo);
+                starchivo.setString(1,codAsistencia[i]);
+                starchivo.setString(2,jTextFieldNombreArchivo.getText());
+                starchivo.setString(3,jTextArea1.getText());
+                starchivo.setBlob(4, fis, bytes);
+                starchivo.executeUpdate();
+                //Cerrar el statement
+                starchivo.close();
             }
-
+            //Cierro la conexion
+            cnx.desconectar();
+        }catch(SQLException e){
+            System.out.println("Error: "+e.getMessage());
+        }
     }
     /**/
     /*codigo para descargar archivo*/
@@ -287,7 +308,12 @@ public class ProfesorArchivos extends javax.swing.JFrame {
                 Blob blob = rs.getBlob(5);
                 InputStream is = blob.getBinaryStream();
                 almacenarDiscoDuro(is,getNombreSeleccionado());
-            }  
+            }
+            //Cerrar el resultset y statement
+            st.close();
+            rs.close();
+            //Cierro la conexion
+            cnx.desconectar();
         }catch(SQLException e){
             System.out.println("Error"+e.getMessage());
         }
