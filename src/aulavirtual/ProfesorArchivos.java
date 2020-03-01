@@ -102,6 +102,7 @@ public class ProfesorArchivos extends javax.swing.JFrame {
             System.out.println("Error"+e.getMessage());
         }
     }
+    
     public void obtenerCodigoAsistencia(String codigoSemana){//Listo y revisado
         String[] vector = new String[codCursoEstudianteSemestre.length];
         try{
@@ -191,7 +192,7 @@ public class ProfesorArchivos extends javax.swing.JFrame {
         } 
     }
     
-    public void refrescar(){
+    public void refrescar(){//Listo, revisado
         DefaultTableModel modelo=(DefaultTableModel) jTableArchivos.getModel();
         modelo.setRowCount(0);//limpiar el modelo
         try{
@@ -213,14 +214,17 @@ public class ProfesorArchivos extends javax.swing.JFrame {
         }
     }
     
-    public void eliminarArchivo(){//<---revisar
+    public void eliminarArchivo(){//Listo y Revisado
         try{
             Conectar cnx = new Conectar();
             Connection registro = cnx.getConnection();
-            String sql="delete from Archivo\n" +
-            "where nombreArchivo=\""+getNombreSeleccionado()+"\" and descripcion=\""+getDescripcionSeleccionado()+"\";";
-            PreparedStatement st = registro.prepareStatement(sql);
-            st.executeUpdate();
+            for(int i=0;i<codAsistencia.length;i++){
+                String sql="delete from Archivo\n" +
+                    "where nombreArchivo=\""+getNombreSeleccionado()+"\" and descripcion=\""+getDescripcionSeleccionado()+"\" "
+                        + " and codAsistencia='"+codAsistencia[i]+"'";
+                PreparedStatement st = registro.prepareStatement(sql);
+                st.executeUpdate();
+            }
         }catch(SQLException e){
             System.out.println("Error"+e.getMessage());
         }
@@ -234,7 +238,6 @@ public class ProfesorArchivos extends javax.swing.JFrame {
         se.setFileSelectionMode(JFileChooser.FILES_ONLY);//para selecionar solo archivos, no carpetas
         int estado = se.showOpenDialog(null);
         if(estado==JFileChooser.APPROVE_OPTION){//si el usuario dio aceptar
-            
             try{
                 fis = new FileInputStream(se.getSelectedFile());//archivo seleccionado
                 this.longitudBytes = (int)se.getSelectedFile().length();//COMVIERTO A UN ENTERO SIMPEL
@@ -245,20 +248,16 @@ public class ProfesorArchivos extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "se seleccionó el archivo");
                 /*crear el icono*/
                 //Image icono = ImageIO.read( se.getSelectedFile().getScaleInstance() );
-                
             } catch (FileNotFoundException ex){
                 ex.printStackTrace();
             }
         }
-        
     }
     public void subirArchivo(FileInputStream archivo, int bytes){//Listo, revisado
         try{
             Conectar cnx = new Conectar();
             Connection archivosql = cnx.getConnection();
-            JOptionPane.showMessageDialog(null, "Cantidad de codigo de asistencia"+codAsistencia.length);//******************
             for(int i=0; i<codAsistencia.length;i++){
-                JOptionPane.showMessageDialog(null, "se subio el archivo numero:"+(i+1));//***********************
                 String sqlarchivo="insert into Archivo(codAsistencia,nombreArchivo,descripcion,archivo) values(?,?,?,?);";
                 PreparedStatement starchivo = archivosql.prepareStatement(sqlarchivo);
                 starchivo.setString(1,codAsistencia[i]);
@@ -615,12 +614,9 @@ public class ProfesorArchivos extends javax.swing.JFrame {
 
     private void jTableArchivosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableArchivosMouseClicked
         // TODO add your handling code here:
-        
         int seleccion = jTableArchivos.rowAtPoint(evt.getPoint()); //muestra el numero de la fila selecionada
-        
         setNombreSeleccionado(String.valueOf(jTableArchivos.getValueAt(seleccion, 0)));
         setDescripcionSeleccionado(String.valueOf(jTableArchivos.getValueAt(seleccion, 1)));
-        
     }//GEN-LAST:event_jTableArchivosMouseClicked
 
     private void jButtonEliminarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarArchivoActionPerformed
