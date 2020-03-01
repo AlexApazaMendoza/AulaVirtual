@@ -254,21 +254,23 @@ public class ProfesorArchivos extends javax.swing.JFrame {
         }
     }
     public void subirArchivo(FileInputStream archivo, int bytes){//Listo, revisado
-        try{
-            Conectar cnx = new Conectar();
-            Connection archivosql = cnx.getConnection();
-            for(int i=0; i<codAsistencia.length;i++){
-                String sqlarchivo="insert into Archivo(codAsistencia,nombreArchivo,descripcion,archivo) values(?,?,?,?);";
-                PreparedStatement starchivo = archivosql.prepareStatement(sqlarchivo);
-                starchivo.setString(1,codAsistencia[i]);
-                starchivo.setString(2,jTextFieldNombreArchivo.getText());
-                starchivo.setString(3,jTextArea1.getText());
-                starchivo.setBlob(4, fis, bytes);
-                starchivo.executeUpdate();
+
+            try{
+                Conectar cnx = new Conectar();
+                Connection archivosql = cnx.getConnection();
+                for(int i=0; i<codAsistencia.length;i++){
+                    String sqlarchivo="insert into Archivo(codAsistencia,nombreArchivo,descripcion,archivo) values(?,?,?,?);";
+                    PreparedStatement starchivo = archivosql.prepareStatement(sqlarchivo);
+                    starchivo.setString(1,codAsistencia[i]);
+                    starchivo.setString(2,jTextFieldNombreArchivo.getText());
+                    starchivo.setString(3,jTextArea1.getText());
+                    starchivo.setBlob(4, fis, bytes);
+                    starchivo.executeUpdate();
+                }
+            }catch(SQLException e){
+                System.out.println("Error: "+e.getMessage());
             }
-        }catch(SQLException e){
-            System.out.println("Error: "+e.getMessage());
-        }
+
     }
     /**/
     /*codigo para descargar archivo*/
@@ -278,7 +280,7 @@ public class ProfesorArchivos extends javax.swing.JFrame {
             Connection registro = cnx.getConnection();
             String sql="select *from Archivo\n" +
             "where nombreArchivo=\""+getNombreSeleccionado()+"\" and descripcion=\""+getDescripcionSeleccionado()+"\""
-                        + " and codAsistencia='"+codAsistencia[0]+"'";;
+                        + " and codAsistencia='"+codAsistencia[0]+"'";
             PreparedStatement st = registro.prepareStatement(sql);
             ResultSet rs= st.executeQuery();
             while(rs.next()){
@@ -322,7 +324,6 @@ public class ProfesorArchivos extends javax.swing.JFrame {
     }
     
     /*TERMINA MI CODIGO*/
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
