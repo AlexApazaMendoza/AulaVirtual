@@ -272,12 +272,13 @@ public class ProfesorArchivos extends javax.swing.JFrame {
     }
     /**/
     /*codigo para descargar archivo*/
-    public void descargarArchivo(){
+    public void descargarArchivo(){//Listo,revisado
         try{
             Conectar cnx = new Conectar();
             Connection registro = cnx.getConnection();
             String sql="select *from Archivo\n" +
-            "where nombreArchivo=\""+getNombreSeleccionado()+"\" and descripcion=\""+getDescripcionSeleccionado()+"\";";
+            "where nombreArchivo=\""+getNombreSeleccionado()+"\" and descripcion=\""+getDescripcionSeleccionado()+"\""
+                        + " and codAsistencia='"+codAsistencia[0]+"'";;
             PreparedStatement st = registro.prepareStatement(sql);
             ResultSet rs= st.executeQuery();
             while(rs.next()){
