@@ -69,14 +69,14 @@ public class Login extends javax.swing.JFrame {
                         stE.close();
                         rsE.close();
                     }else{
-                        JOptionPane.showInputDialog("No aparece en el sistema universitario");
+                        JOptionPane.showMessageDialog(null,"No aparece en el sistema universitario");
                     }
                     //Cierro el resultset y statement
                     stE.close();
                     rsE.close();
                 }
             }else{
-                JOptionPane.showInputDialog("Valores incorrectos");
+                JOptionPane.showMessageDialog(null,"Valores incorrectos");
             }
             //Cierro la conexion
             cnx.desconectar();
