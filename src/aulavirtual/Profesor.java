@@ -73,6 +73,11 @@ public class Profesor extends javax.swing.JFrame {
                 jTextFieldEdadProfesor.setText(String.valueOf(calcular(dateToCalendar(rs.getDate(3)))));
                 jTextFieldEscuelaProfesor.setText(rs.getString(4));
             }
+            //Cierro la conexion
+            cnx.desconectar();
+            //Cierro el resultset y statement
+            rs.close();
+            st.close();
         }catch(SQLException e){
             System.out.println("Error"+e.getMessage());
         }
@@ -97,6 +102,11 @@ public class Profesor extends javax.swing.JFrame {
                 modelo.addRow(v);
             }  
             jTableCursos.setModel(modelo);
+            //Cierro la conexion
+            cnx.desconectar();
+            //Cierro el resultset y statement
+            rs.close();
+            st.close();
         }catch(SQLException e){
             System.out.println("Error"+e.getMessage());
         }
@@ -118,6 +128,11 @@ public class Profesor extends javax.swing.JFrame {
                 BufferedImage bi=ImageIO.read(is);
                 li=new ImageIcon(bi.getScaledInstance(jLabelFoto.getWidth(),jLabelFoto.getHeight(), Image.SCALE_DEFAULT));
             }
+            //Cierro la conexion
+            cnx.desconectar();
+            //Cierro el resultset y statement
+            rs.close();
+            st.close();
         }catch(SQLException e){
             System.out.println("Error:" + e.getMessage());
         }catch (IOException ex){
@@ -138,6 +153,11 @@ public class Profesor extends javax.swing.JFrame {
                 setCodigoCurso(rs.getString(1));
                 jTextFieldNomCurso.setText(rs.getString(2));
             }
+            //Cierro la conexion
+            cnx.desconectar();
+            //Cierro el resultset y statement
+            rs.close();
+            st.close();
         }catch(SQLException e){
             System.out.println("Error"+e.getMessage());
         }
@@ -155,6 +175,11 @@ public class Profesor extends javax.swing.JFrame {
                 subirSilabu(fis, longitudBytes,rs.getString(4));
             }
             JOptionPane.showMessageDialog(null, "Se agregaron a todas las matriculas");
+            //Cierro la conexion
+            cnx.desconectar();
+            //Cierro el resultset y statement
+            rs.close();
+            st.close();
         }catch(SQLException e){
             System.out.println("Error"+e.getMessage());
         }
@@ -188,6 +213,10 @@ public class Profesor extends javax.swing.JFrame {
             stsilabu.setString(1,jTextFieldNombreSilabu.getText());
             stsilabu.setBlob(2, fis, bytes);
             stsilabu.executeUpdate();
+            //Cierro la conexion
+            cnx.desconectar();
+            //Cierro el statement
+            stsilabu.close();
         }catch(SQLException e){
             System.out.println("Error: "+e.getMessage());
         }
@@ -218,6 +247,10 @@ public class Profesor extends javax.swing.JFrame {
             PreparedStatement stfoto = fotosql.prepareStatement(sqlfoto);
             stfoto.setBlob(1, fis, longitud);
             stfoto.executeUpdate();
+            //Cierro la conexion
+            cnx.desconectar();
+            //Cierro el resultset y statement
+            stfoto.close();
         }catch(SQLException e){
             System.out.println("Error: "+e.getMessage());
         }

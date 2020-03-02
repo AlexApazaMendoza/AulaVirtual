@@ -5,50 +5,18 @@
  */
 package aulavirtual;
 
-import Conexion.Conectar;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.Vector;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
-
 /**
  *
- * @author Alex
+ * @author apaza
  */
 public class ProfesorAlumnos extends javax.swing.JFrame {
-
-    private static ProfesorAlumnos instance = null;
-
-    public static ProfesorAlumnos getInstance() {
-        if (instance == null) {
-            instance = new ProfesorAlumnos();
-        }
-        return instance;
-    }
 
     /**
      * Creates new form ProfesorAlumnos
      */
-    
-   
-   
-  
-  public String nomcurso;
-public void obtenercurso(String nomcurso){
-    this.nomcurso=nomcurso;
-                }
-
-            
     public ProfesorAlumnos() {
         initComponents();
- 
     }
-    
-   
-     
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -63,7 +31,7 @@ public void obtenercurso(String nomcurso){
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTableAlumno = new javax.swing.JTable();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -90,35 +58,31 @@ public void obtenercurso(String nomcurso){
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jTableAlumno.setModel(new javax.swing.table.DefaultTableModel(
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
-                "Apellidos  Nombres", "Codigo"
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jTableAlumno.setToolTipText("");
-        jScrollPane1.setViewportView(jTableAlumno);
+        jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(70, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(213, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(179, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -180,16 +144,11 @@ public void obtenercurso(String nomcurso){
         });
     }
 
-    public DefaultTableModel getModeloTabla() {
-        return (DefaultTableModel) jTableAlumno.getModel();
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelCabecera;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTableAlumno;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
-
-    
 }

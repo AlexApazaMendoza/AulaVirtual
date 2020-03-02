@@ -50,7 +50,14 @@ public class Login extends javax.swing.JFrame {
                     Profesor p=new Profesor();
                     p.setDniProfesor(getDni());
                     p.setVisible(true);
+                    //Cierro el resultset y statement
+                    stP.close();
+                    rsP.close();
                 }else{
+                    //Cierro el resultset y statement
+                    stP.close();
+                    rsP.close();
+                    //
                     PreparedStatement stE = registro.prepareStatement(sqlEstudiante);
                     ResultSet rsE= stE.executeQuery();
                     if(rsE.next()){
@@ -58,14 +65,24 @@ public class Login extends javax.swing.JFrame {
                         Alumno a=new Alumno();
                         a.setDniEstudiante(getDni());
                         a.setVisible(true);
+                        //Cierro el resultset y statement
+                        stE.close();
+                        rsE.close();
                     }else{
                         JOptionPane.showInputDialog("No aparece en el sistema universitario");
                     }
+                    //Cierro el resultset y statement
+                    stE.close();
+                    rsE.close();
                 }
             }else{
                 JOptionPane.showInputDialog("Valores incorrectos");
             }
+            //Cierro la conexion
             cnx.desconectar();
+            //Cierro el resultset y statement
+            st.close();
+            rs.close();
             this.dispose();
         }catch(SQLException e){
             System.out.println("Error"+e.getMessage());
