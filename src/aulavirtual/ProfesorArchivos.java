@@ -369,7 +369,6 @@ public class ProfesorArchivos extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButtonEliminarArchivo = new javax.swing.JButton();
         jButtonDescarga = new javax.swing.JButton();
-        prueba = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
@@ -377,6 +376,7 @@ public class ProfesorArchivos extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jTextFieldNombreArchivo = new javax.swing.JTextField();
+        jButtonRetornar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -453,13 +453,6 @@ public class ProfesorArchivos extends javax.swing.JFrame {
             }
         });
 
-        prueba.setText("jButton3");
-        prueba.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pruebaActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -472,9 +465,7 @@ public class ProfesorArchivos extends javax.swing.JFrame {
                         .addComponent(jComboBoxSemana, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(54, 54, 54)
                         .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(prueba)
-                        .addGap(36, 36, 36))
+                        .addGap(36, 208, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jButtonDescarga)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -487,9 +478,7 @@ public class ProfesorArchivos extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jComboBoxSemana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton1)
-                        .addComponent(prueba)))
+                    .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -534,6 +523,15 @@ public class ProfesorArchivos extends javax.swing.JFrame {
         jTextFieldNombreArchivo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jTextFieldNombreArchivo.setEnabled(false);
 
+        jButtonRetornar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jButtonRetornar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/salida.png"))); // NOI18N
+        jButtonRetornar.setText("Retornar");
+        jButtonRetornar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRetornarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -545,7 +543,8 @@ public class ProfesorArchivos extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 503, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jButtonRetornar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButtonAgregarArchivo))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel1)
@@ -567,9 +566,11 @@ public class ProfesorArchivos extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonAgregarArchivo)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonAgregarArchivo)
+                    .addComponent(jButtonRetornar))
                 .addContainerGap())
         );
 
@@ -663,17 +664,10 @@ public class ProfesorArchivos extends javax.swing.JFrame {
         obtenercodCursoEstudianteSemestre();
     }//GEN-LAST:event_formWindowOpened
 
-    private void pruebaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pruebaActionPerformed
+    private void jButtonRetornarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRetornarActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null, "nuevo sin el git");
-        //
-        /*
-            for(int j=0;j<codCursoEstudianteSemestre.length;j++){
-                JOptionPane.showMessageDialog(null, "Matriculas "+j+" : "+codCursoEstudianteSemestre[j] );
-            }*/
-            //
-        
-    }//GEN-LAST:event_pruebaActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButtonRetornarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -716,6 +710,7 @@ public class ProfesorArchivos extends javax.swing.JFrame {
     private javax.swing.JButton jButtonAgregarArchivo;
     private javax.swing.JButton jButtonDescarga;
     private javax.swing.JButton jButtonEliminarArchivo;
+    private javax.swing.JButton jButtonRetornar;
     private javax.swing.JComboBox<String> jComboBoxSemana;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
@@ -727,6 +722,5 @@ public class ProfesorArchivos extends javax.swing.JFrame {
     private javax.swing.JTable jTableArchivos;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextFieldNombreArchivo;
-    private javax.swing.JButton prueba;
     // End of variables declaration//GEN-END:variables
 }

@@ -626,8 +626,9 @@ public class Profesor extends javax.swing.JFrame {
 
     private void jButtonAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlumnosActionPerformed
         // TODO add your handling code here:
-        ProfesorAlumnos pAlumnos=new ProfesorAlumnos();
-        pAlumnos.setVisible(true);
+        ProfesorAlumnos pAl=new ProfesorAlumnos();
+        pAl.setCodCurso(getCodigoCurso());
+        pAl.setVisible(true);
     }//GEN-LAST:event_jButtonAlumnosActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
