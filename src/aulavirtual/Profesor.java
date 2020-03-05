@@ -651,6 +651,8 @@ public class Profesor extends javax.swing.JFrame {
 
     private void jTableCursosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableCursosMouseClicked
         // TODO add your handling code here:
+        jTableCursos.setRowSelectionAllowed(true);
+        jTableCursos.setColumnSelectionAllowed(false);
         int seleccion=jTableCursos.rowAtPoint(evt.getPoint());
         seleccionarCurso(String.valueOf(jTableCursos.getValueAt(seleccion,0)));//se obtiene el codigo del curso y se muestra el nombre
     }//GEN-LAST:event_jTableCursosMouseClicked
