@@ -108,6 +108,9 @@ public class Login extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(0, 0, 0, 0));
+        setPreferredSize(new java.awt.Dimension(450, 470));
+        setResizable(false);
+        setSize(new java.awt.Dimension(450, 470));
 
         jButtonLogin.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jButtonLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/entrar.png"))); // NOI18N

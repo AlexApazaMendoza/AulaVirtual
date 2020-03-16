@@ -274,6 +274,9 @@ public class ProfesorAlumnos extends javax.swing.JFrame {
         jButtonRetornar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(700, 600));
+        setResizable(false);
+        setSize(new java.awt.Dimension(700, 600));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -286,7 +289,7 @@ public class ProfesorAlumnos extends javax.swing.JFrame {
         jPanelCabecera.setLayout(jPanelCabeceraLayout);
         jPanelCabeceraLayout.setHorizontalGroup(
             jPanelCabeceraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 675, Short.MAX_VALUE)
+            .addGap(0, 676, Short.MAX_VALUE)
         );
         jPanelCabeceraLayout.setVerticalGroup(
             jPanelCabeceraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
