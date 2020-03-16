@@ -405,7 +405,7 @@ public class ProfesorArchivos extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(153, 0, 0), new java.awt.Color(255, 153, 0)));
 
-        jTableArchivos.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jTableArchivos.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jTableArchivos.setForeground(new java.awt.Color(0, 102, 51));
         jTableArchivos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -494,7 +494,7 @@ public class ProfesorArchivos extends javax.swing.JFrame {
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(0, 0, 153), new java.awt.Color(51, 102, 255)), "Subir Archivos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 12))); // NOI18N
 
         jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jTextArea1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jTextArea1.setForeground(new java.awt.Color(0, 102, 51));
         jTextArea1.setRows(5);
         jScrollPane2.setViewportView(jTextArea1);

@@ -298,6 +298,7 @@ public class ProfesorAlumnos extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        jTableAlumnos.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jTableAlumnos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -313,6 +314,7 @@ public class ProfesorAlumnos extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTableAlumnos);
 
+        jLabelNombreCurso.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabelNombreCurso.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jButtonAsistencia.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N

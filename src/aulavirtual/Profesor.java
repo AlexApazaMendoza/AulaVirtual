@@ -550,6 +550,7 @@ public class Profesor extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jTableCursos.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jTableCursos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 

@@ -646,7 +646,7 @@ public class Alumno extends javax.swing.JFrame {
 
         jLayeredPane1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jButtonDescargarSilabu.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jButtonDescargarSilabu.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jButtonDescargarSilabu.setForeground(new java.awt.Color(51, 102, 0));
         jButtonDescargarSilabu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/descargarSilabu.png"))); // NOI18N
         jButtonDescargarSilabu.setText("Descargar Silabu");
@@ -656,11 +656,11 @@ public class Alumno extends javax.swing.JFrame {
             }
         });
 
-        jComboBoxSemana.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jComboBoxSemana.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jComboBoxSemana.setForeground(new java.awt.Color(51, 102, 0));
         jComboBoxSemana.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Semana 1", "Semana 2", "Semana 3", "Semana 4", "Semana 5", "Semana 6", "Semana 7", "Semana 8", "Semana 9", "Semana 10", "Semana 11", "Semana 12", "Semana 13", "Semana 14", "Semana 15", "Semana 16" }));
 
-        jButtonSeleccionar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jButtonSeleccionar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jButtonSeleccionar.setForeground(new java.awt.Color(51, 102, 0));
         jButtonSeleccionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Seleccionar.png"))); // NOI18N
         jButtonSeleccionar.setText("Seleccionar");
@@ -670,7 +670,7 @@ public class Alumno extends javax.swing.JFrame {
             }
         });
 
-        jTableArchivos.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTableArchivos.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jTableArchivos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -687,10 +687,10 @@ public class Alumno extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jTableArchivos);
 
-        jTextFieldNomCurso.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jTextFieldNomCurso.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jTextFieldNomCurso.setEnabled(false);
 
-        jButtonDescargarArchivo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jButtonDescargarArchivo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jButtonDescargarArchivo.setForeground(new java.awt.Color(51, 102, 0));
         jButtonDescargarArchivo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/descargarArchivo.png"))); // NOI18N
         jButtonDescargarArchivo.setText("Descargar Archivo");
@@ -756,7 +756,7 @@ public class Alumno extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTableCursos.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTableCursos.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jTableCursos.setForeground(new java.awt.Color(51, 102, 0));
         jTableCursos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
