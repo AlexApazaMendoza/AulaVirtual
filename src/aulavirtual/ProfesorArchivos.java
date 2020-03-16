@@ -379,7 +379,6 @@ public class ProfesorArchivos extends javax.swing.JFrame {
         jButtonRetornar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(580, 630));
         setResizable(false);
         setSize(new java.awt.Dimension(580, 630));
         addWindowListener(new java.awt.event.WindowAdapter() {
